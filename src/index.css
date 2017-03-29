@@ -7,3 +7,7 @@ body {
 .completed {
 	text-decoration: underline;
 }
+
+form {
+	padding: 10px;
+}
