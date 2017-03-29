@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import TodoItem from "./components/TodoItem";
 
 class Todo extends Component {
-
   constructor(){
     super();
     this.changeStatus = this.changeStatus.bind(this);
@@ -31,37 +31,19 @@ class Todo extends Component {
       this.setState({
         tasks: tasks
       })
-
   }
 
-
   render() {
-
-
     return (
       <ul>
         {
           this.state.tasks.map((task, index) => {
-            return <TodoList key={task.name} details={task} handleClick={this.changeStatus} index={index} />
+            return <TodoItem key={task.name} details={task} handleClick={this.changeStatus} index={index} />
           })
         }
       </ul>
     )
   }
-}
-
-
-class TodoList extends Component {
-
-render(){
-
-  
-  return (
-      <li onClick={()=>{
-        this.props.handleClick(this.props.index)
-      }} className={this.props.details.completed ? 'completed' : ''}>{this.props.details.name}</li>
-  )
-}
 }
 
 export default Todo;
