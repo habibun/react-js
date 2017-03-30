@@ -9,6 +9,7 @@ class Todo extends Component {
     this.changeStatus = this.changeStatus.bind(this);
     this.updateTask = this.updateTask.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
     this.state = {
       tasks: [
         {
@@ -59,6 +60,16 @@ class Todo extends Component {
       })
   }
 
+  deleteTask(index){
+      console.log(index);
+      let tasks = this.state.tasks;
+      tasks.splice(index, 1);
+
+      this.setState({
+        tasks: tasks
+      })
+  }
+
   render() {
 
     return (
@@ -71,7 +82,13 @@ class Todo extends Component {
         <ul>
         {
           this.state.tasks.map((task, index) => {
-            return <TodoItem key={task.name} details={task} handleClick={this.changeStatus} index={index} />
+            return <TodoItem 
+              key={task.name} 
+              details={task} 
+              handleClick={this.changeStatus} 
+              index={index} 
+              deleteTask={this.deleteTask}
+              />
           })
         }
       </ul>
