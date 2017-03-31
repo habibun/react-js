@@ -10,6 +10,7 @@ class Todo extends Component {
     this.updateTask = this.updateTask.bind(this);
     this.addTask = this.addTask.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.editTask = this.editTask.bind(this);
     this.state = {
       tasks: [
         {
@@ -70,8 +71,17 @@ class Todo extends Component {
       })
   }
 
-  render() {
+  editTask(index, newValue){
+      let tasks = this.state.tasks;
+      let task = tasks[index];
+      task.name = newValue;
 
+      this.setState({
+        tasks: tasks
+      });
+  }
+
+  render() {
     return (
       <section>
         <TodoForm 
@@ -83,11 +93,12 @@ class Todo extends Component {
         {
           this.state.tasks.map((task, index) => {
             return <TodoItem 
-              key={task.name} 
+              key={index} 
               details={task} 
               handleClick={this.changeStatus} 
               index={index} 
               deleteTask={this.deleteTask}
+              editTask={this.editTask}
               />
           })
         }
