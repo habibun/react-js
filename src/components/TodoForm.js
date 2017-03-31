@@ -9,4 +9,10 @@ const TodoForm = (props) => {
 	)
 }
 
+TodoForm.propTypes = {
+	currentTask: React.PropTypes.string.isRequired,
+	updateTask: React.PropTypes.func.isRequired,
+	addTask: React.PropTypes.func.isRequired,
+}
+
 export default TodoForm;

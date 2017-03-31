@@ -18,7 +18,7 @@ class TodoItem extends React.Component {
 	updateItem(evt){
 		evt.preventDefault();
 		this.props.editTask(this.props.index, this.input.value);
-		console.log(this.input.value);
+		this.toggleState();
 	}
 
 	renderForm(){
@@ -72,6 +72,14 @@ class TodoItem extends React.Component {
   			</section>
 		)
 	}
+}
+
+TodoItem.propTypes = {
+	details: React.PropTypes.object.isRequired,
+	handleClick: React.PropTypes.func.isRequired,
+	index: React.PropTypes.number.isRequired,
+	deleteTask: React.PropTypes.func.isRequired,
+	editTask: React.PropTypes.func.isRequired,
 }
 
 export default TodoItem;
