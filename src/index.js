@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Todo from './Todo';
 import './index.css';
-import {Router, Route, browserHistory, IndexRoute, Link} from 'react-router';
+import {Router, Route, browserHistory, IndexRoute, Link, Redirect} from 'react-router';
 
 const AboutPage = (props) => (
 	<section>
@@ -18,6 +18,9 @@ const HomePage = () => (
 	<section>
 		<h2>This is Home page</h2>
 		<Link to="/about">About</Link>
+		{' '}
+		{' '}
+		<Link to="/querystring">Query string</Link>
 	</section>
 )
 
@@ -39,15 +42,25 @@ const IndexRoutePage = () => (
 	<h2>IndexRoutePage Page</h2>
 )
 
+const QueryString = (props) => (
+	<section>
+		<h3>Query string test </h3>
+		<p>my param: {props.routeParams.id}</p>
+	</section>
+)
+
 ReactDOM.render(
   // <Todo />,
 	<Router history={browserHistory}>
+		<Redirect from="/" to="/about" />		
 		<Route path="/" component={HomePage} />		
+		<Route path="/querystring(/:id)" component={QueryString} />
 		<Route path="/about" component={AboutPage} >
 			<IndexRoute component={IndexRoutePage} />
 			<Route path="nestedone" component={NestedOne} />
 			<Route path="nestedtwo" component={NestedTwo} />
 		</Route>
+
 	</Router>,
 
   document.getElementById('root')
