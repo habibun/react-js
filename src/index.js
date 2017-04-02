@@ -3,6 +3,16 @@ import ReactDOM from 'react-dom';
 import Todo from './Todo';
 import './index.css';
 import {Router, Route, browserHistory, IndexRoute, Link, Redirect} from 'react-router';
+import { style } from 'typestyle';
+
+const test = style({
+	backgroundColor: 'yellow',
+	$nest: {
+		"& > h2": {
+			backgroundColor: 'red',
+		}
+	}
+});
 
 const AboutPage = (props) => (
 	<section>
@@ -16,11 +26,16 @@ const AboutPage = (props) => (
 
 const HomePage = () => (
 	<section>
-		<h2>This is Home page</h2>
+		<div className={test}>
+			<h2 className={test}>This is Home page</h2>
+			<p>this is a test</p>
+		</div>
+
 		<Link to="/about">About</Link>
 		{' '}
 		{' '}
 		<Link to="/querystring">Query string</Link>
+
 	</section>
 )
 
@@ -52,7 +67,7 @@ const QueryString = (props) => (
 ReactDOM.render(
   // <Todo />,
 	<Router history={browserHistory}>
-		<Redirect from="/" to="/about" />		
+		{/* <Redirect from="/" to="/about" /> */}		
 		<Route path="/" component={HomePage} />		
 		<Route path="/querystring(/:id)" component={QueryString} />
 		<Route path="/about" component={AboutPage} >
