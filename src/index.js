@@ -65,18 +65,6 @@ const QueryString = (props) => (
 )
 
 ReactDOM.render(
-  // <Todo />,
-	<Router history={browserHistory}>
-		{/* <Redirect from="/" to="/about" /> */}		
-		<Route path="/" component={HomePage} />		
-		<Route path="/querystring(/:id)" component={QueryString} />
-		<Route path="/about" component={AboutPage} >
-			<IndexRoute component={IndexRoutePage} />
-			<Route path="nestedone" component={NestedOne} />
-			<Route path="nestedtwo" component={NestedTwo} />
-		</Route>
-
-	</Router>,
-
+  <Todo />,
   document.getElementById('root')
 );

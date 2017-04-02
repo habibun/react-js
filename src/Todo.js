@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import TodoItem from "./components/TodoItem";
 import TodoForm from "./components/TodoForm";
+import BindFunctions from "./utils";
 
 
 class Todo extends Component {
   constructor(){
     super();
-    this.changeStatus = this.changeStatus.bind(this);
-    this.updateTask = this.updateTask.bind(this);
-    this.addTask = this.addTask.bind(this);
-    this.deleteTask = this.deleteTask.bind(this);
-    this.editTask = this.editTask.bind(this);
+
+    BindFunctions.call(this, ['changeStatus', 'updateTask', 'addTask', 'deleteTask', 'editTask']);
     this.state = {
       tasks: [
         {
