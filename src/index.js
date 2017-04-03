@@ -97,6 +97,45 @@ const NestedOne = () => (
 	</section>
 )
 
+class Counter extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			counter: 0
+		}
+	}
+
+	increaseCounter(){
+		/*this.setState({
+			counter: this.state.counter + 1
+		}, () => {
+			console.log(this.state.counter)
+		})*/
+
+		// console.log(this.state.counter)
+
+		this.setState((prevState) => {
+			return {
+				counter: prevState.counter + 1
+			}
+		}, () => {
+		console.log(this.state.counter)
+			
+		})
+		// console.log(this.state.counter)
+
+	}
+
+	render() {
+		return(
+			<section>
+			{this.state.counter}
+			<button onClick={this.increaseCounter.bind(this)}>Add </button>
+			</section>
+		)
+	}
+}
+
 
 const NestedTwo = () => (
 	<section>
@@ -117,6 +156,6 @@ const QueryString = (props) => (
 )
 
 ReactDOM.render(
-  <App/>,
+  <Counter/>,
   document.getElementById('root')
 );
