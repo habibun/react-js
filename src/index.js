@@ -4,6 +4,7 @@ import Todo from './Todo';
 import './index.css';
 import {Router, Route, browserHistory, IndexRoute, Link, Redirect} from 'react-router';
 import { style } from 'typestyle';
+import $ from "jquery";
 
 const test = style({
 	backgroundColor: 'yellow',
@@ -13,6 +14,56 @@ const test = style({
 		}
 	}
 });
+
+class Fetch extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			content: []
+		}
+	}
+
+	componentDidMount() {
+		$.ajax({
+			url: this.props.url,
+			success: (data) => {
+				this.setState({
+					content: data
+				})
+			},
+			error: (error) => {
+				console.log("error", error)
+			}
+		})
+	}
+
+	render() {
+		return(
+			<section>
+				{ this.props.children(this.state.content) }
+			</section>
+		)
+	}
+}
+
+class App extends React.Component {
+	render() {
+		return(
+			<section>
+				<Fetch url="https://jsonplaceholder.typicode.com/posts" >
+				{
+					(data) => {
+						return data.map((value, index) => {
+							return <li key={index}>{value.title}</li>
+						})
+					}
+				}
+				</Fetch>
+
+			</section>
+			)
+	}
+}
 
 const AboutPage = (props) => (
 	<section>
@@ -24,7 +75,7 @@ const AboutPage = (props) => (
 	</section>
 )
 
-const HomePage = () => (
+const HomePage = (props) => (
 	<section>
 		<div className={test}>
 			<h2 className={test}>This is Home page</h2>
@@ -35,6 +86,7 @@ const HomePage = () => (
 		{' '}
 		{' '}
 		<Link to="/querystring">Query string</Link>
+		{props.children}
 
 	</section>
 )
@@ -65,6 +117,6 @@ const QueryString = (props) => (
 )
 
 ReactDOM.render(
-  <Todo />,
+  <App/>,
   document.getElementById('root')
 );
